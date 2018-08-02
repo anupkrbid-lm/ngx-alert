@@ -3,17 +3,32 @@
   position: fixed;
   width: 35%;
   right: 5px;
-  top:45px;
+  top: 45px;
+}
+
+i {
+  cursor: pointer;
 }
 
 .alert {
   color: #fff;
   padding: 18px 12px;
   overflow: hidden;
+  margin: 4px 0;
 }
-.alert strong{width: 90%;
-  float: left;}
 
-i {
-  cursor: pointer;
+.alert strong {
+  width: 85%;
+}
+
+.success {
+  background-color: rgba(138, 217, 25, 0.7);
+}
+
+.warning {
+  background-color: rgba(255, 181, 62, 0.7);
+}
+
+.danger {
+  background-color: rgba(249, 36, 63, 0.7);
 }

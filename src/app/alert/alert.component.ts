@@ -1,33 +1,35 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { AlertService } from './alert.service';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css']
 })
-export class AlertComponent implements OnInit {
+export class AlertComponent implements OnInit, OnDestroy {
 
-  @Input('text') text = 'Danger Alert';
-  @Input('type') type = 'danger';
-  color: string;
+  message = 'Danger Alert';
+  type = 'danger';
+  alerts: any[] = [];
+  alertSubscrition: Subscription;
 
-  constructor() { }
+  constructor(private alertService: AlertService) { }
 
   ngOnInit() {
-    if (this.type === 'success') {
-      this.color = 'rgba(138,217,25,0.7)';
-    } else if (this.type === 'warning') {
-      this.color = 'rgba(255,181,62,0.7)';
-    } else {
-      this.color = 'rgba(249,36,63,0.7)';
-    }
-    // setTimeout(() => {
-    //   this.store.dispatch(new AlertActions.AlertHide());
-    // }, 3000);
+    this.alertSubscrition = this.alertService.trigger.subscribe((data: any) => {
+      console.log(data);
+      this.alerts.push(data);
+    });
   }
 
   dismiss() {
     // this.store.dispatch(new AlertActions.AlertHide());
+  }
+
+  ngOnDestroy() {
+    this.alertSubscrition.unsubscribe();
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { animate, group, keyframes, query, stagger, style, transition, trigger } from '@angular/animations';
+import { AlertService } from './alert/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -38,8 +39,14 @@ import { animate, group, keyframes, query, stagger, style, transition, trigger }
 export class AppComponent {
   items = ['Hey this is an item.', 'Here is another one.', 'This is awesome.'];
 
+  constructor(private alertService: AlertService) {}
+
   addItem(item) {
     this.items.push('new item');
+    this.alertService.trigger.next({
+      message: 'Danger',
+      type: 'danger'
+    });
   }
 
   removeItem(item) {

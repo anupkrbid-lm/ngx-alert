@@ -1,9 +1,9 @@
 <div class="alert"
-     role="alert"
-     [style.background]="color"
->
-	<strong>{{text}}</strong>
-	<i (click)="dismiss()"
-	   class="fa fa-remove fa-fw pull-right"
-	></i>
+      role="alert"
+      [ngClass]="alert.type"
+      *ngFor="let alert of alerts">
+  <strong>{{alert.message}}</strong>
+  <i (click)="dismiss()"
+      class="fa fa-remove fa-fw pull-right"
+  ></i>
 </div>
