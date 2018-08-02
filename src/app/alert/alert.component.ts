@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { animate, group, keyframes, query, stagger, style, transition, trigger } from '@angular/animations';
+
 import { Subscription } from 'rxjs';
 
 import { AlertService } from './alert.service';
@@ -10,7 +12,28 @@ const generateRandomId = () => {
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.css']
+  styleUrls: ['./alert.component.css'],
+  animations: [
+    trigger('listAnimaiton', [
+      transition('* => *', [
+        query(':enter', style({ opacity: 0 }), { optional: true }),
+        query(':enter', stagger('300ms', [
+          animate('1s ease-in', keyframes([
+            style({ opacity: 0, transform: 'translateX(-75px)', offset: 0 }),
+            style({ opacity: 0.5, transform: 'translateX(35px)', offset: 0.3 }),
+            style({ opacity: 1, transform: 'translateX(0)', offset: 1 })
+          ]))
+        ]), { optional: true }),
+        query(':leave', stagger('300ms', [
+          animate('1s ease-in', keyframes([
+            style({ opacity: 1, transform: 'translateX(0)', offset: 0 }),
+            style({ opacity: 0.5, transform: 'translateX(35px)', offset: 0.3 }),
+            style({ opacity: 0, transform: 'translateX(-75px)', offset: 1 })
+          ]))
+        ]), { optional: true })
+      ])
+    ])
+  ]
 })
 export class AlertComponent implements OnInit, OnDestroy {
 
