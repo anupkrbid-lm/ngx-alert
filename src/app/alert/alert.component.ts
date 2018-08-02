@@ -47,6 +47,10 @@ export class AlertComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.alertSubscrition = this.alertService.trigger.subscribe((data: any) => {
       data.id = generateRandomId();
+      data.hide = setTimeout(() => {
+        clearTimeout(data.hide);
+        this.dismiss(data.id);
+      }, 3000);
       this.alerts.push(data);
     });
   }

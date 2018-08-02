@@ -43,9 +43,10 @@ export class AppComponent {
 
   addItem(item) {
     this.items.push('new item');
+
     this.alertService.trigger.next({
-      message: `Dange ${++this.index}`,
-      type: 'danger'
+      message: `Succcess ${++this.index}`,
+      type: 'success'
     });
   }
 
