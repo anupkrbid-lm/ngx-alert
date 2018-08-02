@@ -25,7 +25,7 @@ import { animate, group, keyframes, query, stagger, style, transition, trigger }
         ]), { optional: true })
       ])
     ]),
-    trigger('explainerAnimaiton', [
+    trigger('explainerAnimation', [
       transition('* => *', [
         query('.col', style({ opacity: 0, transform: 'translateX(-40px)' })),
         query('.col', stagger('500ms', [
