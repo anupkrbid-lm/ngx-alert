@@ -2,8 +2,8 @@
       role="alert"
       [ngClass]="alert.type"
       *ngFor="let alert of alerts">
-  <strong>{{alert.message}}</strong>
-  <i (click)="dismiss()"
+  <strong>{{ alert.message }}</strong>
+  <i (click)="dismiss(alert.id)"
       class="fa fa-remove fa-fw pull-right"
   ></i>
 </div>

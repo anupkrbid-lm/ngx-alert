@@ -3,6 +3,10 @@ import { Subscription } from 'rxjs';
 
 import { AlertService } from './alert.service';
 
+const generateRandomId = () => {
+  return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
+};
+
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
@@ -19,13 +23,14 @@ export class AlertComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.alertSubscrition = this.alertService.trigger.subscribe((data: any) => {
-      console.log(data);
+      data.id = generateRandomId();
       this.alerts.push(data);
     });
   }
 
-  dismiss() {
-    // this.store.dispatch(new AlertActions.AlertHide());
+  dismiss(alertId: string) {
+    const alertIdIndex = this.alerts.findIndex(alert => alert.id === alertId);
+    this.alerts.splice(alertIdIndex, 1);
   }
 
   ngOnDestroy() {

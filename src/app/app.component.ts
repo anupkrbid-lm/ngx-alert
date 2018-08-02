@@ -38,13 +38,13 @@ import { AlertService } from './alert/alert.service';
 })
 export class AppComponent {
   items = ['Hey this is an item.', 'Here is another one.', 'This is awesome.'];
-
+  index  = 0;
   constructor(private alertService: AlertService) {}
 
   addItem(item) {
     this.items.push('new item');
     this.alertService.trigger.next({
-      message: 'Danger',
+      message: `Dange ${++this.index}`,
       type: 'danger'
     });
   }
